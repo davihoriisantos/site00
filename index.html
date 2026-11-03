@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Davi Jun — Inteligência Artificial, Inovação & Portfólio Pessoal</title>
+  <meta name="description" content="Portfólio pessoal de Davi Jun, estudante de 15 anos do Colégio FECAP no curso técnico de Inteligência Artificial. Conheça sua trajetória, conquistas e visão de futuro.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Favicon com símbolo circular e ponto carmesim -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 34' fill='none' stroke='%23b9a9ff' stroke-width='2'><circle cx='17' cy='17' r='14'/><circle cx='31' cy='17' r='14' fill='%23e63946' fill-opacity='0.85'/></svg>">
+
+  <!-- Google Fonts: Geist, Geist Mono, Inter & Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS (Local com fallback para CDN) -->
+  <script src="assets/tailwind.js"></script>
+  <script>
+    if (typeof tailwind === 'undefined') {
+      document.write('<script src="https://cdn.tailwindcss.com"><\/script>');
+    }
+  </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            stage: '#050508',
+            surface: '#0d0e14',
+            surface2: '#13141d',
+            lav: '#b9a9ff',
+            lav2: '#8f7cff',
+            crimson: '#e63946',
+            crimsonGlow: '#ff3b5c',
+            neonCyan: '#38bdf8',
+            mute: '#9497a6',
+            dim: '#5c5c68',
+            tile: '#121218',
+            line: '#26262e'
+          },
+          fontFamily: {
+            sans: ['Geist', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"Geist Mono"', 'ui-monospace', 'monospace'],
+            jp: ['"Noto Sans JP"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Three.js & GSAP -->
+  <script src="assets/three.min.js"></script>
+  <script src="assets/gsap.min.js"></script>
+
+  <style>
+    :root {
+      --lav: #b9a9ff;
+      --lav2: #8f7cff;
+      --crimson: #e63946;
+      --crimson-glow: #ff3b5c;
+      --ease: cubic-bezier(.2, .75, .2, 1);
+    }
+
+    body, html {
+      background: #050508;
+      color: #f3f2ff;
+      font-family: Geist, Inter, system-ui, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--lav);
+      color: #050508;
+    }
+
+    /* 3D WebGL Canvas & Film Grain */
+    #gl {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.035;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 1.4s steps(6) infinite;
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-3%, 2%); }
+      40% { transform: translate(2%, -4%); }
+      60% { transform: translate(-4%, -1%); }
+      80% { transform: translate(3%, 3%); }
+    }
+
+    /* Micro typography */
+    .micro {
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 13px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Glass Panels & Surfaces */
+    .glass-card {
+      background: rgba(14, 15, 22, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+      transition: border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(185, 169, 255, 0.28);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 24px rgba(185, 169, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .glass-card-crimson:hover {
+      border-color: rgba(230, 57, 70, 0.4);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 24px rgba(230, 57, 70, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Tags & Badges */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: #12131a;
+      border: 1px solid #282a35;
+      color: #e7e9ec;
+      font-size: 12.5px;
+      transition: all .3s;
+    }
+
+    .tag-crimson {
+      background: rgba(230, 57, 70, 0.12);
+      border-color: rgba(230, 57, 70, 0.35);
+      color: #ff6b7e;
+    }
+
+    .tag-lav {
+      background: rgba(185, 169, 255, 0.12);
+      border-color: rgba(185, 169, 255, 0.35);
+      color: #d2c8ff;
+    }
+
+    /* Glow Pill Button */
+    .glow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 44px;
+      border-radius: 999px;
+      background: radial-gradient(120% 140% at 50% 120%, rgba(120, 100, 240, 0.35), #0b0914 70%);
+      color: #ffffff;
+      border: 1.5px solid #d9cbfd;
+      font-weight: 500;
+      font-size: 14.5px;
+      box-shadow: 0 0 14px rgba(139, 124, 240, 0.45), 0 0 2px rgba(217, 203, 253, 0.8), inset 0 0 14px rgba(139, 124, 240, 0.18);
+      transition: all .35s var(--ease);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .glow-pill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
+      transform: translateX(-120%);
+      transition: transform .8s var(--ease);
+    }
+
+    .glow-pill:hover {
+      box-shadow: 0 0 32px rgba(160, 140, 255, 0.75), inset 0 0 20px rgba(160, 140, 255, 0.3);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .glow-pill:hover::after {
+      transform: translateX(120%);
+    }
+
+    /* Tactile LM Button */
+    .lm {
+      --h: 46px;
+      --u: calc(var(--h) / 516);
+      display: inline-grid;
+      place-items: center;
+      height: var(--h);
+      position: relative;
+    }
+
+    .lm-plate {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: #0b0c0e;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+      transition: all .3s;
+    }
+
+    .lm-btn {
+      position: relative;
+      height: var(--h);
+      padding: 0 22px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f3f2ff;
+      font-size: 13.5px;
+      font-weight: 500;
+      text-decoration: none;
+      z-index: 2;
+    }
+
+    .lm:hover .lm-plate {
+      border-color: rgba(185, 169, 255, 0.4);
+      box-shadow: 0 0 20px rgba(185, 169, 255, 0.25);
+    }
+
+    /* Glow text */
+    .glow-text {
+      text-shadow: 0 0 32px rgba(185, 169, 255, 0.38);
+    }
+
+    .glow-crimson {
+      text-shadow: 0 0 28px rgba(230, 57, 70, 0.45);
+    }
+
+    /* Navigation link indicator */
+    .nav-link {
+      color: #9497a6;
+      transition: color .25s ease;
+      position: relative;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover, .nav-link.is-active {
+      color: #ffffff;
+    }
+
+    .nav-link.is-active::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #b9a9ff;
+      border-radius: 999px;
+      box-shadow: 0 0 8px rgba(185, 169, 255, 0.85);
+    }
+
+    /* Japanese Hanko Stamp Effect */
+    .hanko-seal {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 2px solid #e63946;
+      border-radius: 8px;
+      color: #e63946;
+      font-family: "Noto Sans JP", sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1;
+      box-shadow: 0 0 16px rgba(230, 57, 70, 0.3), inset 0 0 8px rgba(230, 57, 70, 0.15);
+      background: rgba(230, 57, 70, 0.05);
+      transform: rotate(-6deg);
+    }
+
+    /* Subtle radial glow accents */
+    .radial-beam {
+      background: radial-gradient(ellipse at 50% 0%, rgba(185, 169, 255, 0.18) 0%, rgba(139, 124, 240, 0.05) 50%, transparent 80%);
+    }
+
+    .radial-sun {
+      background: radial-gradient(circle at 50% 50%, rgba(230, 57, 70, 0.16) 0%, transparent 70%);
+    }
+
+    /* Watermark Japanese Characters */
+    .jp-watermark {
+      font-family: "Noto Sans JP", serif;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-stage text-[#f3f2ff] relative selection:bg-lav selection:text-stage">
+
+  <!-- 3D WebGL Canvas & Noise Overlay -->
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="grain" aria-hidden="true"></div>
+
+  <!-- FIXED NAVIGATION BAR -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-40 h-[84px] max-md:h-[68px] flex items-center justify-between px-8 md:px-16 bg-[#050508]/85 backdrop-blur-xl border-b border-white/[0.07] transition-all">
+    <!-- Brand & Mon Logo -->
+    <a href="#hero" class="flex items-center gap-3.5 group">
+      <!-- Mon / Solar Symbol -->
+      <div class="relative w-10 h-10 flex items-center justify-center">
+        <svg class="w-10 h-7 transition-transform group-hover:scale-105" viewBox="0 0 48 34" fill="none" stroke="#b9a9ff" stroke-width="1.8">
+          <circle cx="17" cy="17" r="14"></circle>
+          <circle cx="31" cy="17" r="14"></circle>
+        </svg>
+        <div class="absolute w-2.5 h-2.5 rounded-full bg-crimson shadow-[0_0_10px_#e63946] -top-0.5 right-1"></div>
+      </div>
+      <div>
+        <span class="text-[20px] font-semibold tracking-[0.16em] text-white block leading-none">DAVI JUN</span>
+        <span class="text-[10px] font-jp tracking-[0.25em] text-[#9da1ae] block mt-1 uppercase">ダビ・ジュン · AI & FECAP</span>
+      </div>
+    </a>
+
+    <!-- Center Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-9 text-[15px]">
+      <a class="nav-link is-active" href="#hero">Início</a>
+      <a class="nav-link" href="#sobre">Sobre</a>
+      <a class="nav-link" href="#formacao">FECAP & IA</a>
+      <a class="nav-link" href="#conquistas">Olimpíadas</a>
+      <a class="nav-link" href="#interesses">Interesses</a>
+      <a class="nav-link" href="#futuro">Objetivos</a>
+    </nav>
+
+    <!-- Right Quick Action -->
+    <div class="flex items-center gap-4">
+      <div class="lm">
+        <span class="lm-plate" aria-hidden="true"></span>
+        <a href="#contato" class="lm-btn group">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+          <span class="text-xs md:text-sm tracking-wide text-white group-hover:text-lav transition-colors">Conectar</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="relative z-10 pt-[84px]">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[calc(100vh-84px)] flex items-center justify-center px-6 md:px-16 py-16 relative radial-beam">
+      <div class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Headline & Introduction -->
+        <div class="lg:col-span-7 space-y-7 text-left">
+          
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="tag micro tag-crimson flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-crimson"></span>
+              Origem Japonesa · 日本
+            </span>
+            <span class="tag micro tag-lav">
+              Colégio FECAP · Técnico em IA
+            </span>
+            <span class="tag micro text-[#9497a6]">
+              15 anos
+            </span>
+          </div>
+
+          <!-- Grand Display Title -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] font-medium tracking-tight leading-[1.08] text-white">
+            <span class="block">Davi Jun</span>
+            <span class="block glow-text text-transparent bg-clip-text bg-gradient-to-r from-lav via-[#d2c8ff] to-[#ffffff]">
+              Inteligência Artificial
+            </span>
+            <span class="block text-2xl sm:text-3xl md:text-4xl text-[#9497a6] font-normal mt-2">
+              & Paixão por Inovação e Conhecimento.
+            </span>
+          </h1>
+
+          <!-- Lead Paragraph -->
+          <p class="text-lg md:text-xl text-[#9da1ae] leading-relaxed max-w-2xl font-light">
+            Estudante do <strong class="text-white font-medium">Colégio FECAP</strong> no curso técnico de <strong class="text-lav font-medium">Inteligência Artificial</strong>. Movido pela curiosidade científica, pela resolução de problemas complexos e pela união entre a precisão da tradição e as fronteiras do futuro.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-5 pt-3">
+            <a href="#sobre" class="glow-pill">
+              Explorar Trajetória
+              <svg class="w-4 h-4 ml-2.5 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+            <a href="#conquistas" class="tag hover:border-lav hover:text-white transition-all text-sm px-6 h-14">
+              🏆 Conquistas Acadêmicas
+            </a>
+          </div>
+
+          <!-- Highlight Metric Pills -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/[0.08] max-w-lg">
+            <div>
+              <div class="text-2xl font-semibold text-white">15<span class="text-lav font-normal text-lg"> anos</span></div>
+              <div class="text-xs text-[#9da1ae] mt-0.5">Jovem Talento Tech</div>
+            </div>
+            <div>
+              <div class="text-2xl font-semibold text-lav">FECAP</div>
+              <div class="text-xs text-[#9da1ae] mt-0.5">Ensino Médio + IA</div>
+            </div>
+            <div>
+              <div class="text-2xl font-semibold text-crimsonGlow">2ª Fase</div>
+              <div class="text-xs text-[#9da1ae] mt-0.5">OBMEP & Port.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Modern Visual Card with Davi's Photo -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-[380px]">
+            <!-- Decorative Japanese Sun Ambient Glow -->
+            <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-crimson/25 via-lav/20 to-transparent blur-2xl -z-10 opacity-70"></div>
+            
+            <!-- Photo Card Frame -->
+            <div class="glass-card p-3.5 rounded-3xl relative overflow-hidden border border-white/15">
+              
+              <!-- Subtle Kanji Background Watermark -->
+              <div class="absolute right-3 top-3 text-7xl font-jp font-bold text-white/[0.03] select-none pointer-events-none">
+                知能
+              </div>
+
+              <!-- Davi's Photo Container -->
+              <div class="relative rounded-2xl overflow-hidden aspect-[3/4] bg-[#0c0d13]">
+                <img src="assets/davi-jun.png" alt="Davi Jun — Estudante de Inteligência Artificial do Colégio FECAP" class="w-full h-full object-cover object-center filter saturate-[0.95] contrast-[1.03] transition-transform duration-700 hover:scale-105" loading="eager">
+                
+                <!-- Inner Gradient Scrim -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-80"></div>
+                
+                <!-- Bottom Photo Caption & Hanko Seal -->
+                <div class="absolute bottom-4 inset-x-4 flex items-end justify-between">
+                  <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-lav block">FECAP · Aluno IA</span>
+                    <span class="text-lg font-semibold text-white block">Davi Jun</span>
+                    <span class="text-xs text-[#9da1ae]">São Paulo, Brasil</span>
+                  </div>
+                  <!-- Japanese Hanko Seal -->
+                  <div class="hanko-seal" title="Jun (潤) - Nome e Selo de Identidade">
+                    <span class="text-sm">潤</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Micro Badge under photo -->
+              <div class="mt-3.5 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-between text-xs">
+                <span class="text-[#9da1ae] flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-crimson"></span>
+                  Herança & Inovação
+                </span>
+                <span class="font-mono text-lav">São Paulo · SP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: SOBRE MIM -->
+    <section id="sobre" class="py-24 px-6 md:px-16 border-t border-white/[0.07] relative">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="hanko-seal !w-7 !h-7 !text-xs !border-crimson">自</span>
+            <span class="micro text-lav">01 — Identidade & Origem</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white">
+            Curiosidade que move, herança que guia.
+          </h2>
+          <p class="text-base sm:text-lg text-[#9da1ae] mt-3 max-w-2xl">
+            Uma ponte entre os princípios da cultura japonesa e o dinamismo da era digital.
+          </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          
+          <!-- Main Narrative Card -->
+          <div class="md:col-span-8 glass-card p-8 md:p-10 rounded-3xl space-y-6">
+            <h3 class="text-2xl font-medium text-white flex items-center gap-3">
+              <span>Quem sou eu</span>
+              <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.06] text-lav">15 anos · São Paulo</span>
+            </h3>
+
+            <p class="text-base md:text-lg text-[#c5c8d4] leading-relaxed font-light">
+              Meu nome é <strong class="text-white font-medium">Davi Jun</strong>. Tenho 15 anos, tenho <strong class="text-crimsonGlow font-medium">origem japonesa</strong> e vivo em São Paulo, onde dedico minha rotina aos estudos no <strong class="text-white font-medium">Colégio FECAP</strong>, integrando o Ensino Médio ao curso técnico em <strong class="text-lav font-medium">Inteligência Artificial</strong>.
+            </p>
+
+            <p class="text-base md:text-lg text-[#c5c8d4] leading-relaxed font-light">
+              Desde cedo, me encantei por tecnologia e pelo modo como a computação pode resolver desafios reais. Na cultura japonesa herdada da minha família, aprendi o valor do <strong class="text-white font-medium">Kaizen (改善)</strong> — a filosofia da melhoria contínua —, a atenção cuidadosa aos detalhes e a disciplina com os estudos.
+            </p>
+
+            <p class="text-base md:text-lg text-[#c5c8d4] leading-relaxed font-light">
+              Para mim, a Inteligência Artificial não é apenas uma matéria ou ferramenta de programação; é a linguagem do futuro na qual escolhi me aprofundar para construir uma carreira sólida, ética e transformadora.
+            </p>
+
+            <!-- Quote Callout -->
+            <div class="p-5 rounded-2xl bg-gradient-to-r from-crimson/10 via-lav/10 to-transparent border-l-4 border-crimson mt-4">
+              <p class="text-base text-white italic">
+                "Acredito que a combinação entre o rigor do pensamento lógico e a sensibilidade humana é a verdadeira chave para a inovação."
+              </p>
+              <span class="text-xs font-mono text-[#9da1ae] mt-2 block">— Davi Jun</span>
+            </div>
+          </div>
+
+          <!-- Side Pillars Cards -->
+          <div class="md:col-span-4 space-y-6">
+            
+            <!-- Pillar 1: Origem Japonesa -->
+            <div class="glass-card glass-card-crimson p-6 rounded-3xl">
+              <div class="w-10 h-10 rounded-2xl bg-crimson/15 border border-crimson/30 flex items-center justify-center text-crimson mb-4 text-xl font-bold">
+                日
+              </div>
+              <h4 class="text-lg font-medium text-white">Raízes & Tradição</h4>
+              <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+                Apreço profundo pela estética minimalista, pelo respeito ao aprendizado e pela cultura nipônica que faz parte da minha essência diária.
+              </p>
+            </div>
+
+            <!-- Pillar 2: Vocação Tecnológica -->
+            <div class="glass-card p-6 rounded-3xl">
+              <div class="w-10 h-10 rounded-2xl bg-lav/15 border border-lav/30 flex items-center justify-center text-lav mb-4 text-xl font-bold">
+                AI
+              </div>
+              <h4 class="text-lg font-medium text-white">Foco no Futuro</h4>
+              <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+                Vontade constante de absorver novas tecnologias, entender arquiteturas de Machine Learning e praticar desenvolvimento de software.
+              </p>
+            </div>
+
+            <!-- Pillar 3: Equilíbrio Pessoal -->
+            <div class="glass-card p-6 rounded-3xl">
+              <div class="w-10 h-10 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mb-4 text-lg">
+                🥢
+              </div>
+              <h4 class="text-lg font-medium text-white">Culinária & Convivência</h4>
+              <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+                Apaixonado pela culinária japonesa e por boas massas italianas — momentos de descontração e partilha com pessoas queridas.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: FORMAÇÃO & FECAP -->
+    <section id="formacao" class="py-24 px-6 md:px-16 border-t border-white/[0.07] bg-surface/40 relative">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="micro text-lav">02 — Educação & Tecnologia</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white">
+            Colégio FECAP: A base do meu aprendizado em IA.
+          </h2>
+          <p class="text-base sm:text-lg text-[#9da1ae] mt-3 max-w-2xl">
+            Uma das instituições de ensino mais tradicionais e respeitadas do país, preparando para as demandas de um mundo orientado a dados.
+          </p>
+        </div>
+
+        <!-- Spotlight Card: FECAP & Técnico de IA -->
+        <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden border-lav/20 mb-10">
+          <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-lav/10 blur-3xl pointer-events-none"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-8 space-y-4">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lav/15 border border-lav/30 text-lav text-xs font-mono">
+                <span>CURSO TÉCNICO PROFISSIONALIZANTE</span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-semibold text-white">
+                Técnico em Inteligência Artificial — Colégio FECAP
+              </h3>
+              <p class="text-base sm:text-lg text-[#c5c8d4] font-light leading-relaxed">
+                No Colégio FECAP, o curso técnico proporciona imersão prática em programação, estruturas matemáticas, modelos de aprendizado de máquina e visão computacional. É o espaço onde desenvolvo competências técnicas essenciais e aprendo a pensar criticamente sobre o impacto social da tecnologia.
+              </p>
+            </div>
+
+            <div class="lg:col-span-4 flex flex-col gap-3.5 bg-black/40 p-5 rounded-2xl border border-white/10">
+              <div class="text-xs font-mono text-[#9da1ae] uppercase tracking-wider">Metodologia & Ambiente</div>
+              <div class="flex items-center gap-3 text-sm text-white">
+                <span class="w-2 h-2 rounded-full bg-lav"></span>
+                <span>Projetos práticos e desafios reais</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm text-white">
+                <span class="w-2 h-2 rounded-full bg-lav"></span>
+                <span>Pensamento algorítmico rigoroso</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm text-white">
+                <span class="w-2 h-2 rounded-full bg-lav"></span>
+                <span>Ética e governança de dados</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm text-white">
+                <span class="w-2 h-2 rounded-full bg-lav"></span>
+                <span>Trabalho colaborativo em laboratório</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4 Pillars of Knowledge -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="text-xs font-mono text-lav">01 · CORE</span>
+            <h4 class="text-lg font-medium text-white mt-2">Machine Learning</h4>
+            <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+              Algoritmos de classificação, regressão e agrupamento para identificar padrões complexos em grandes volumes de dados.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="text-xs font-mono text-lav">02 · DEV</span>
+            <h4 class="text-lg font-medium text-white mt-2">Python & Lógica</h4>
+            <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+              Desenvolvimento de scripts, automação e implementação de estruturas de dados eficientes com bibliotecas modernas.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="text-xs font-mono text-lav">03 · INSIGHTS</span>
+            <h4 class="text-lg font-medium text-white mt-2">Análise de Dados</h4>
+            <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+              Exploração estatística, tratamento de datasets, métricas de acurácia e visualização gráfica de informações.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl">
+            <span class="text-xs font-mono text-lav">04 · ETHICS</span>
+            <h4 class="text-lg font-medium text-white mt-2">IA Responsável</h4>
+            <p class="text-sm text-[#9da1ae] mt-2 leading-relaxed">
+              Compreensão das implicações éticas de vieses em algoritmos e criação de soluções transparentes que respeitam o usuário.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: CONQUISTAS & OLIMPÍADAS -->
+    <section id="conquistas" class="py-24 px-6 md:px-16 border-t border-white/[0.07] relative">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="micro text-crimsonGlow">03 — Destaques Acadêmicos</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white">
+            Olimpíadas: Raciocínio lógico e clareza de pensamento.
+          </h2>
+          <p class="text-base sm:text-lg text-[#9da1ae] mt-3 max-w-2xl">
+            A dedicação aos estudos validada em competições acadêmicas de abrangência nacional.
+          </p>
+        </div>
+
+        <!-- 2 Grand Achievement Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          
+          <!-- OBMEP Card -->
+          <div class="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden group hover:border-crimson/50 transition-all">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-crimson/10 rounded-full blur-2xl group-hover:bg-crimson/20 transition-all"></div>
+            
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-crimson/15 border border-crimson/30 flex items-center justify-center text-crimson text-2xl">
+                📐
+              </div>
+              <span class="tag micro tag-crimson font-mono">
+                Classificado · 2ª Fase
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-white mb-3">
+              OBMEP
+            </h3>
+            <h4 class="text-sm font-mono text-[#9da1ae] mb-4 uppercase tracking-wider">
+              Olimpíada Brasileira de Matemática das Escolas Públicas
+            </h4>
+
+            <p class="text-base text-[#c5c8d4] font-light leading-relaxed">
+              Conquista da classificação para a <strong class="text-white font-medium">Segunda Fase</strong> da maior olimpíada científica do Brasil. Demonstra domínio de raciocínio dedutivo, geometria, aritmética avançada e paixão pela solução de enigmas matemáticos complexos.
+            </p>
+
+            <div class="mt-6 pt-6 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#9da1ae]">
+              <span>Raciocínio Analítico</span>
+              <span class="text-crimsonGlow">Nível Nacional</span>
+            </div>
+          </div>
+
+          <!-- OP (Olimpíada de Português) Card -->
+          <div class="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden group hover:border-lav/50 transition-all">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-lav/10 rounded-full blur-2xl group-hover:bg-lav/20 transition-all"></div>
+            
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-lav/15 border border-lav/30 flex items-center justify-center text-lav text-2xl">
+                ✍️
+              </div>
+              <span class="tag micro tag-lav font-mono">
+                Classificado · 2ª Fase
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-white mb-3">
+              Olimpíada de Português (OP)
+            </h3>
+            <h4 class="text-sm font-mono text-[#9da1ae] mb-4 uppercase tracking-wider">
+              Interpretação, Gramática & Análise Textual
+            </h4>
+
+            <p class="text-base text-[#c5c8d4] font-light leading-relaxed">
+              Avanço para a <strong class="text-white font-medium">Segunda Fase</strong> da competição, evidenciando habilidade de interpretação crítica, clareza argumentativa e domínio da norma culta. Uma competência indispensável para a formulação de problemas em IA e comunicação assertiva.
+            </p>
+
+            <div class="mt-6 pt-6 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-[#9da1ae]">
+              <span>Linguística & Expressão</span>
+              <span class="text-lav">Nível Nacional</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Synthesis banner -->
+        <div class="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-surface2 via-[#11121b] to-surface border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1 text-center md:text-left">
+            <h4 class="text-lg font-medium text-white">A união entre Exatas e Linguagens</h4>
+            <p class="text-sm text-[#9da1ae] max-w-2xl font-light">
+              Construir inteligência artificial de alto nível requer rigor matemático para os modelos e sensibilidade linguística para compreender dados humanos e comandos complexos.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-mono text-lav bg-lav/10 border border-lav/20 px-4 py-2.5 rounded-full shrink-0">
+            <span>Matemática + Comunicação = IA</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: INTERESSES & HOBBIES -->
+    <section id="interesses" class="py-24 px-6 md:px-16 border-t border-white/[0.07] bg-surface/30 relative">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="micro text-lav">04 — Personalidade & Gostos</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white">
+            Para além das linhas de código.
+          </h2>
+          <p class="text-base sm:text-lg text-[#9da1ae] mt-3 max-w-2xl">
+            A convergência entre a revolução digital, a contemplação cultural e a arte da gastronomia.
+          </p>
+        </div>
+
+        <!-- 4 Grid Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Item 1: IA & Futuro -->
+          <div class="glass-card p-8 rounded-3xl space-y-4">
+            <div class="text-3xl">🤖</div>
+            <h3 class="text-xl font-medium text-white">Inteligência Artificial & Programação</h3>
+            <p class="text-sm md:text-base text-[#9da1ae] leading-relaxed font-light">
+              Fascínio por acompanhar novos modelos fundacionais, experimentação com prompts e códigos, e curiosidade constante em descobrir como redes neurais artificiais conseguem aprender e criar.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Machine Learning</span>
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Inovação</span>
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Deep Learning</span>
+            </div>
+          </div>
+
+          <!-- Item 2: Cultura Japonesa -->
+          <div class="glass-card glass-card-crimson p-8 rounded-3xl space-y-4">
+            <div class="text-3xl">🏮</div>
+            <h3 class="text-xl font-medium text-white">Cultura & Estética Japonesa</h3>
+            <p class="text-sm md:text-base text-[#9da1ae] leading-relaxed font-light">
+              Orgulho das raízes familiares e conexão genuína com os valores orientais: harmonia, disciplina, respeito às tradições e uma admiração pelo design limpo e funcional que atravessa séculos.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Kaizen (改善)</span>
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Minimalismo</span>
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Tradição</span>
+            </div>
+          </div>
+
+          <!-- Item 3: Gastronomia Japonesa -->
+          <div class="glass-card glass-card-crimson p-8 rounded-3xl space-y-4">
+            <div class="text-3xl">🍣</div>
+            <h3 class="text-xl font-medium text-white">Gastronomia Japonesa (和食)</h3>
+            <p class="text-sm md:text-base text-[#9da1ae] leading-relaxed font-light">
+              Grande apreço pelos pratos tradicionais japoneses — desde a arte e precisão de um sushi bem elaborado até o conforto reconfortante de um ramen fumegante em dias de estudo intenso.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Sushi & Sashimi</span>
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Ramen</span>
+              <span class="text-xs font-mono bg-crimson/10 text-crimsonGlow px-3 py-1 rounded-md">Washoku</span>
+            </div>
+          </div>
+
+          <!-- Item 4: Massas & Culinária Artesanal -->
+          <div class="glass-card p-8 rounded-3xl space-y-4">
+            <div class="text-3xl">🍝</div>
+            <h3 class="text-xl font-medium text-white">Apreço por Massas</h3>
+            <p class="text-sm md:text-base text-[#9da1ae] leading-relaxed font-light">
+              Junto da culinária japonesa, as massas ocupam o topo dos meus pratos favoritos. A textura de uma massa fresca e os molhos bem apurados são momentos de celebração gastronômica no meu dia a dia.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Massas Artesanais</span>
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Gastronomia</span>
+              <span class="text-xs font-mono bg-white/[0.05] text-[#d2c8ff] px-3 py-1 rounded-md">Convivência</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: OBJETIVOS PARA O FUTURO -->
+    <section id="futuro" class="py-24 px-6 md:px-16 border-t border-white/[0.07] relative">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="micro text-lav">05 — Horizontes & Ambições</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white">
+            O que busco construir no amanhã.
+          </h2>
+          <p class="text-base sm:text-lg text-[#9da1ae] mt-3 max-w-2xl">
+            Passos deliberados para transformar potencial juvenil em impacto tecnológico duradouro.
+          </p>
+        </div>
+
+        <!-- Roadmap Timeline -->
+        <div class="space-y-8 relative before:absolute before:inset-0 before:left-8 before:w-0.5 before:bg-gradient-to-b before:from-crimson before:via-lav before:to-transparent">
+          
+          <!-- Step 1 -->
+          <div class="relative flex items-start gap-8 pl-4">
+            <div class="w-9 h-9 rounded-full bg-crimson flex items-center justify-center text-white font-mono text-sm shadow-[0_0_16px_#e63946] z-10 shrink-0">
+              01
+            </div>
+            <div class="glass-card p-6 md:p-8 rounded-2xl flex-1">
+              <span class="text-xs font-mono text-crimsonGlow uppercase tracking-wider">Fase Atual · 2026/2027</span>
+              <h3 class="text-xl font-medium text-white mt-1">Excelência no Colégio FECAP</h3>
+              <p class="text-sm md:text-base text-[#9da1ae] mt-2 font-light leading-relaxed">
+                Aprofundar os estudos técnicos no curso de Inteligência Artificial, desenvolver projetos práticos de programação e continuar participando de olimpíadas científicas com foco em superar metas anteriores.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative flex items-start gap-8 pl-4">
+            <div class="w-9 h-9 rounded-full bg-lav flex items-center justify-center text-[#050508] font-mono text-sm font-bold shadow-[0_0_16px_#b9a9ff] z-10 shrink-0">
+              02
+            </div>
+            <div class="glass-card p-6 md:p-8 rounded-2xl flex-1">
+              <span class="text-xs font-mono text-lav uppercase tracking-wider">Médio Prazo · Ensino Superior</span>
+              <h3 class="text-xl font-medium text-white mt-1">Graduação em Ciência da Computação & IA</h3>
+              <p class="text-sm md:text-base text-[#9da1ae] mt-2 font-light leading-relaxed">
+                Ingressar em uma universidade de excelência para cursar Ciência da Computação, Engenharia de Software ou IA, participando de grupos de pesquisa e maratonas de programação.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative flex items-start gap-8 pl-4">
+            <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#050508] font-mono text-sm font-bold shadow-[0_0_16px_#ffffff] z-10 shrink-0">
+              03
+            </div>
+            <div class="glass-card p-6 md:p-8 rounded-2xl flex-1">
+              <span class="text-xs font-mono text-white uppercase tracking-wider">Longo Prazo · Carreira Profissional</span>
+              <h3 class="text-xl font-medium text-white mt-1">Desenvolver Sistemas Inteligentes que Ajudem Pessoas</h3>
+              <p class="text-sm md:text-base text-[#9da1ae] mt-2 font-light leading-relaxed">
+                Trabalhar na linha de frente do desenvolvimento de inteligência artificial, criando soluções tecnológicas que impulsionem a educação, a medicina ou a sustentabilidade de forma ética e inovadora.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: CONTATO & CONEXÕES -->
+    <section id="contato" class="py-24 px-6 md:px-16 border-t border-white/[0.07] bg-surface/50 relative">
+      <div class="max-w-4xl mx-auto text-center space-y-8">
+        
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-lav">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ABERTO A CONEXÕES E OPORTUNIDADES</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white max-w-2xl mx-auto">
+          Vamos construir o futuro juntos?
+        </h2>
+
+        <p class="text-base sm:text-lg text-[#9da1ae] max-w-xl mx-auto font-light leading-relaxed">
+          Seja para trocar ideias sobre Inteligência Artificial, projetos acadêmicos ou oportunidades de aprendizado, será um prazer conversar.
+        </p>
+
+        <!-- Main Contact Card -->
+        <div class="glass-card p-8 md:p-10 rounded-3xl max-w-xl mx-auto space-y-6">
+          <div class="space-y-2">
+            <span class="text-xs font-mono text-[#9da1ae] uppercase tracking-wider block">Contato Principal</span>
+            <div class="text-xl sm:text-2xl font-mono text-white font-medium select-all">
+              davijun.fecap@gmail.com
+            </div>
+            <span class="text-xs text-[#9da1ae] block">São Paulo — SP, Brasil</span>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <a href="mailto:davijun.fecap@gmail.com" class="glow-pill !h-12 !px-8 !text-sm">
+              Enviar Mensagem
+            </a>
+            <button type="button" onclick="copyEmail(this)" class="tag hover:border-lav hover:text-white transition-all text-xs font-mono px-5 h-12">
+              📋 Copiar E-mail
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="end" class="py-12 px-6 md:px-16 border-t border-white/[0.08] bg-[#030305] text-xs text-[#9da1ae]">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <!-- Left: Logo & Copyright -->
+        <div class="flex items-center gap-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-crimson"></div>
+          <span class="font-medium text-white tracking-widest uppercase">Davi Jun</span>
+          <span>— Colégio FECAP · 2026</span>
+        </div>
+
+        <!-- Center: Japanese Signature -->
+        <div class="font-jp text-white/40 tracking-widest text-[11px]">
+          未来を拓く — Construindo o futuro com IA
+        </div>
+
+        <!-- Right: Back to top -->
+        <div>
+          <a href="#hero" class="hover:text-lav transition-colors flex items-center gap-1.5">
+            Voltar ao topo ↑
+          </a>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Interactive Scripts -->
+  <script src="assets/scene.js"></script>
+  <script>
+    // Copy email helper
+    function copyEmail(btn) {
+      const email = 'davijun.fecap@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copiado!';
+        btn.classList.add('border-emerald-400', 'text-emerald-400');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('border-emerald-400', 'text-emerald-400');
+        }, 2500);
+      }).catch(() => {
+        alert('E-mail: ' + email);
+      });
+    }
+
+    // ScrollSpy for Navigation Bar
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(sec => {
+        const sectionTop = sec.offsetTop - 120;
+        const sectionHeight = sec.offsetHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = sec.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('is-active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('is-active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
