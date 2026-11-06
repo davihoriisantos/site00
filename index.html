@@ -61,6 +61,88 @@ body::before{content:"";right:0;height:160px;background:linear-gradient(180deg,r
 #hero .left{max-width:none;margin-top:0!important;margin-left:0!important}#hero h1{font-size:clamp(38px,10.5vw,56px)}#hero p{font-size:15px;max-width:34ch;margin-top:22px}#hero .tag{height:38px;font-size:11px;padding:0 16px}#btn-open{height:50px!important;padding:0 34px!important;font-size:12px}#avatars img{width:36px;height:36px}#plist,#stats{display:none}#shelf-label{top:112px;transform:none;max-width:80vw}#shelf-label h2{font-size:44px}#detail{top:auto;bottom:0;height:auto;width:100%;max-height:72vh;padding:28px 20px;align-items:flex-start;overflow-y:auto;background:linear-gradient(to bottom,rgba(5,5,8,0)0,#050508 40px)}#detail .inner{max-width:none}#d-title{font-size:34px!important}#d-features{margin-top:22px}#d-features li p{font-size:11px!important;line-height:1.5!important}
 .ftile{width:56px!important;height:56px!important}#detail:not(.is-in){opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}#detail.is-in{opacity:1;visibility:visible;transition:opacity .35s}#d-title{}.ftile svg{width:22px;height:22px}#d-cta{height:50px!important;padding:0 30px!important;font-size:12px}#nav{padding-left:20px;padding-right:16px;height:72px}#nav svg:not(.lm-ico){width:36px;height:26px}#nav span{font-size:18px}.glow-pill.sm{height:40px!important;padding:0 16px!important;font-size:10.5px;letter-spacing:.14em;white-space:nowrap}.lm{--h:40px;margin-right:0!important}.lm-btn{font-size:14px;padding:0 16px;gap:6px}.lm-ico{width:9px;height:9px}#btn-next{height:42px;gap:12px;padding:0 16px 0 14px;font-size:11px;white-space:nowrap;bottom:26px}
 #btn-next span:first-child{width:14px;height:14px}#statement h2{font-size:38px}#statement p{font-size:15px}#crumbs,#hint,#nav-links{display:none}}
+/* ======================================================
+   CORREÇÃO DE LEGIBILIDADE & TIPOGRAFIA DOS PROJETOS
+   Elimina sobreposição e letras amontoadas
+====================================================== */
+.work-title {
+  font-size: clamp(34px, 5.2vw, 76px) !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.01em !important;
+  will-change: auto !important;
+}
+.wt-line {
+  overflow: visible !important;
+  padding: 0.05em 0 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+.wt-txt {
+  display: inline-block !important;
+  letter-spacing: -0.01em !important;
+}
+.wt-txt .ch {
+  display: inline-block !important;
+  letter-spacing: normal !important;
+}
+
+.wp-name {
+  font-size: clamp(26px, 3vw, 44px) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+  word-break: normal !important;
+}
+.wp-name .wl {
+  overflow: visible !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+.wp-name .wl-in {
+  display: inline-block !important;
+  letter-spacing: -0.01em !important;
+}
+.wp-name .ch {
+  display: inline-block !important;
+  letter-spacing: normal !important;
+}
+
+.wp-desc {
+  margin-top: 16px !important;
+  font-size: clamp(14px, 1.05vw, 16.5px) !important;
+  line-height: 1.65 !important;
+  color: #a5a8b7 !important;
+  max-width: 48ch !important;
+}
+.wp-meta {
+  margin-top: 20px !important;
+  gap: 8px 20px !important;
+}
+
+/* Garante isolamento perfeito dos slides no desktop: nunca sobrepõe texto de dois projetos */
+@media (min-width: 1024px) {
+  .wp {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.45s cubic-bezier(.2,.75,.2,1), visibility 0s 0.45s !important;
+  }
+  .wp.is-live {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: opacity 0.45s cubic-bezier(.2,.75,.2,1) !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .wp {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    padding: 0 20px 10vh !important;
+  }
+}
 </style>  <script>document.addEventListener('click', event => {
 const anchor = event.target.closest?.('a[href]');
 const href = anchor?.getAttribute('href');
@@ -149,9 +231,9 @@ Davi Jun, 15 anos. Estudante do Colégio FECAP em São Paulo. Unindo a filosofia
 </div>
 </section>
 <aside id='stats' class='fixed right-[60px] top-[37.6%] -translate-y-1/2 z-20 flex flex-col gap-[13px] panel'>
-<div class='stat fade' style='--d:.5s'><div><b data-count='15'>00</b><span>Anos</span></div></div>
-<div class='stat fade' style='--d:.6s'><div><b data-count='02'>00</b><span>Olimpíadas</span></div></div>
-<div class='stat fade' style='--d:.7s'><div><b data-count='01'>00</b><span>FECAP IA</span></div></div>
+<div class='stat fade' style='--d:.5s'><div><b data-count='02'>00</b><span>Patrocínios</span></div></div>
+<div class='stat fade' style='--d:.6s'><div><b data-count='15'>00</b><span>Anos</span></div></div>
+<div class='stat fade' style='--d:.7s'><div><b data-count='02'>00</b><span>Olimpíadas</span></div></div>
 </aside>
 <section id='statement' class='fixed inset-0 z-20 flex flex-col items-center justify-center text-center px-6 pointer-events-none panel' aria-hidden='true'>
 <div class='fade' style='--d:0s'><span class='tag micro'>Manifesto & Filosofia</span></div>
@@ -167,12 +249,14 @@ Davi Jun, 15 anos. Estudante do Colégio FECAP em São Paulo. Unindo a filosofia
 </section>
 <div id='shelf-ui' class='panel' aria-hidden='true'>
 <div id='shelf-label' class='fixed left-[112px] max-md:left-5 top-1/2 -translate-y-1/2 z-20 max-w-[380px] pointer-events-none'>
-<div class='fade' style='--d:0s'><span id='sh-tag' class='tag micro'>Pilar 01 de 06</span></div>
-<h2 id='sh-name' class='display fade mt-[26px] text-[clamp(38px,3.6vw,64px)] text-[#f6f5ff]' style='--d:.08s'>Visão Computacional</h2>
-<p id='sh-caption' class='fade micro mt-[20px] text-[#8a8a96] leading-[1.8]' style='--d:.16s'>Redes neurais que aprendem a ver o mundo</p>
+<div class='fade' style='--d:0s'>
+  <span id='sh-tag' class='tag micro' style='border-color:rgba(52,211,153,0.4); background:rgba(52,211,153,0.08); color:#6ee7b7'>
+    <span class='w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2 inline-block animate-pulse'></span>
+    Destaque 01 de 06 • FECART 2026
+  </span>
 </div>
-<h2 id='sh-name' class='display fade mt-[26px] text-[clamp(38px,3.6vw,64px)] text-[#f6f5ff]' style='--d:.08s'>Encore</h2>
-<p id='sh-caption' class='fade micro mt-[20px] text-[#8a8a96] leading-[1.8]' style='--d:.16s'>Music drops for your truest fans</p>
+<h2 id='sh-name' class='display fade mt-[24px] text-[clamp(36px,3.5vw,60px)] text-[#f6f5ff]' style='--d:.08s'>FloodGuardAI</h2>
+<p id='sh-caption' class='fade micro mt-[18px] text-[#a4a7b5] leading-[1.7]' style='--d:.16s'>Projeto premiado na FECART com 2 patrocínios • Prevenção inteligente de enchentes</p>
 </div>
 <ul id='plist' class='fixed right-[80px] top-1/2 -translate-y-1/2 z-20 flex flex-col gap-[6px] micro'></ul>
 </div>
@@ -198,13 +282,13 @@ Davi Jun, 15 anos. Estudante do Colégio FECAP em São Paulo. Unindo a filosofia
 <section id='work' class='doc-sec'>
 <div class='work-intro'>
 <div class='doc-wrap'>
-<div class='eyebrow'><span class='lm-wrap'><span class='lm micro'>Projetos &amp; Desenvolvimento • 2025 - 2026</span></span></div>
-<h2 class='work-title display' aria-label='Soluções práticas onde teoria e código se encontram.'>
+<div class='eyebrow'><span class='lm-wrap'><span class='lm micro'>Projetos &amp; Inovação • 2025 - 2026</span></span></div>
+<h2 class='work-title display' aria-label='Soluções práticas onde teoria e inteligência artificial se encontram.'>
 <span class='wt-line'><span class='wt-txt'>Soluções práticas,</span></span>
 <span class='wt-line'><span class='wt-txt glow-text'>inteligência artificial.</span></span>
-<span class='wt-line'><span class='wt-txt'>Quatro projetos, em detalhe.</span></span>
+<span class='wt-line'><span class='wt-txt'>Projetos reais em destaque.</span></span>
 </h2>
-<p class='work-lede'>Aplicações reais desenvolvidas no curso técnico em IA da FECAP e projetos independentes em código aberto.</p>
+<p class='work-lede'>Aplicações desenvolvidas no curso técnico em IA da FECAP e iniciativas com impacto social e tecnológico comprovado.</p>
 </div>
 </div>
 <div class='work-gallery'>
@@ -212,48 +296,77 @@ Davi Jun, 15 anos. Estudante do Colégio FECAP em São Paulo. Unindo a filosofia
 <div class='work-rail' aria-hidden='true'><span class='micro'>01</span><i class='rail-track'><b class='rail-fill'></b></i><span class='micro'>04</span></div>
 <div class='work-bigidx' aria-hidden='true'><div class='bigidx-strip'><span>01</span><span>02</span><span>03</span><span>04</span></div></div>
 
+<!-- CASE 01: FLOODGUARDAI (DESTAQUE MÁXIMO FECART 2026) -->
 <article class='wp' data-i='0'>
 <div class='wp-text'>
-<span class='wp-index micro'>Projeto 01 — Visão Computacional</span>
-<h3 class='wp-name display'><span class='wl'><span class='wl-in'>Redes Neurais,</span></span><span class='wl'><span class='wl-in'>visão de máquina.</span></span></h3>
-<p class='wp-desc'>Pipeline de visão computacional em Python utilizando redes neurais convolucionais (CNNs) para extração de atributos, detecção de padrões e classificação de imagens em tempo real.</p>
+<div class='mb-3'>
+  <span class='inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-mono font-medium tracking-wide'>
+    <span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span>
+    DESTAQUE FECART 2026 • 2 PATROCÍNIOS CONQUISTADOS
+  </span>
+</div>
+<span class='wp-index micro'>Case 01 — FloodGuardAI</span>
+<h3 class='wp-name display text-white'>
+  <span class='wl'><span class='wl-in'>FloodGuardAI:</span></span>
+  <span class='wl'><span class='wl-in text-lav'>Prevenção de Enchentes.</span></span>
+</h3>
+<p class='wp-desc'>
+  O <strong>FloodGuardAI</strong> foi um projeto de inteligência artificial de enorme sucesso apresentado na <strong>FECART 2026</strong> (Feira de Criatividade e Arte da FECAP). Criado para antecipar alagamentos urbanos e emitir alertas precoces em tempo real, integrando análise de dados pluviométricos e visão computacional.
+</p>
+<p class='wp-desc !mt-2.5 text-emerald-200/90 text-sm'>
+  🏆 <strong>Projeto premiado na FECART com 2 patrocínios conquistados.</strong> Se você, sua empresa ou investidores tiverem interesse em apoiar, expandir ou colaborar com o FloodGuardAI, estamos de portas abertas para contato!
+</p>
+<ul class='wp-meta micro'>
+  <li class='text-emerald-300 font-semibold'>★ 2 Patrocínios Conquistados</li>
+  <li>FECART 2026 • FECAP</li>
+  <li>Prevenção &amp; IA em Tempo Real</li>
+  <li class='text-lav font-semibold'>Aberto a Parcerias</li>
+</ul>
+<div class='flex items-center gap-3 mt-7 flex-wrap'>
+  <a class='wp-link glow-pill sm micro !mt-0' href='#end'>Entrar em Contato</a>
+  <a class='glow-pill sm micro !mt-0 !bg-transparent !border-white/20 !text-[#9da1ae] hover:!text-white hover:!border-lav' href='mailto:davijun.fecap@gmail.com?subject=Interesse%20no%20FloodGuardAI%20-%20FECART%202026'>Apoiar / Parceria</a>
+</div>
+</div>
+<figure class='wp-media'>
+<div class='wp-mask'><img src='https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/175767be-adaa-426e-ada5-31d51e50cc75/original.png?width=1600&quality=82' alt='FloodGuardAI — IA para Prevenção de Enchentes na FECART 2026' loading='eager' decoding='async'></div>
+<i class='wp-glow'></i>
+</figure>
+</article>
+
+<!-- CASE 02: VISÃO COMPUTACIONAL -->
+<article class='wp' data-i='1'>
+<div class='wp-text'>
+<span class='wp-index micro'>Case 02 — Visão Computacional</span>
+<h3 class='wp-name display text-white'><span class='wl'><span class='wl-in'>Redes Neurais,</span></span><span class='wl'><span class='wl-in text-lav'>visão de máquina.</span></span></h3>
+<p class='wp-desc'>Pipeline em Python utilizando redes neurais convolucionais (CNNs) para extração de atributos, detecção de padrões e classificação de imagens em tempo real no curso técnico de IA da FECAP.</p>
 <ul class='wp-meta micro'><li>Python • OpenCV • Deep Learning</li><li>2025 - 2026</li><li>Colégio FECAP</li></ul>
 <a class='wp-link glow-pill sm micro' href='https://github.com/davihoriisantos/site00' target='_blank'>Ver no GitHub</a>
 </div>
 <figure class='wp-media'><div class='wp-mask'><img src='https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/aba16cf4-fc8c-419c-ab2f-642f979aca96/original.png?width=1600&quality=82' alt='Redes neurais e visão computacional' loading='eager' decoding='async'></div><i class='wp-glow'></i></figure>
 </article>
 
-<article class='wp' data-i='1'>
+<!-- CASE 03: MACHINE LEARNING -->
+<article class='wp' data-i='2'>
 <div class='wp-text'>
-<span class='wp-index micro'>Projeto 02 — Machine Learning</span>
-<h3 class='wp-name display'><span class='wl'><span class='wl-in'>Modelos Preditivos,</span></span><span class='wl'><span class='wl-in'>ciência de dados.</span></span></h3>
-<p class='wp-desc'>Construção de modelos preditivos supervisionados e análise estatística com Scikit-Learn e Pandas. Limpeza e engenharia de dados com validação rigorosa de métricas analíticas.</p>
+<span class='wp-index micro'>Case 03 — Machine Learning</span>
+<h3 class='wp-name display text-white'><span class='wl'><span class='wl-in'>Modelos Preditivos,</span></span><span class='wl'><span class='wl-in text-lav'>ciência de dados.</span></span></h3>
+<p class='wp-desc'>Construção de modelos preditivos supervisionados e análise estatística com Scikit-Learn e Pandas. Limpeza e engenharia de dados com validação rigorosa de métricas analíticas e precisão.</p>
 <ul class='wp-meta micro'><li>Python • Scikit-Learn • Pandas</li><li>2025 - 2026</li><li>Modelos Preditivos</li></ul>
 <a class='wp-link glow-pill sm micro' href='https://github.com/davihoriisantos/site00' target='_blank'>Ver no GitHub</a>
 </div>
 <figure class='wp-media'><div class='wp-mask'><img src='https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/a9ee6470-fc5c-4c9b-854b-74842da0b5ba/original.png?width=1600&quality=82' alt='Modelos preditivos e análise estatística' loading='eager' decoding='async'></div><i class='wp-glow'></i></figure>
 </article>
 
-<article class='wp' data-i='2'>
+<!-- CASE 04: SITE00 & WEBGL -->
+<article class='wp' data-i='3'>
 <div class='wp-text'>
-<span class='wp-index micro'>Projeto 03 — site00 &amp; WebGL</span>
-<h3 class='wp-name display'><span class='wl'><span class='wl-in'>Luz física,</span></span><span class='wl'><span class='wl-in'>espaço 3D.</span></span></h3>
-<p class='wp-desc'>Portfólio interativo construído com Three.js, shaders GLSL de metal líquido e iluminação volumétrica. Uma experiência cinematográfica a 60 FPS diretamente no navegador.</p>
+<span class='wp-index micro'>Case 04 — site00 &amp; WebGL</span>
+<h3 class='wp-name display text-white'><span class='wl'><span class='wl-in'>Luz física,</span></span><span class='wl'><span class='wl-in text-lav'>espaço 3D interativo.</span></span></h3>
+<p class='wp-desc'>Portfólio experimental desenvolvido com Three.js, shaders GLSL de metal líquido e iluminação volumétrica. Uma experiência cinematográfica a 60 FPS diretamente no navegador.</p>
 <ul class='wp-meta micro'><li>Three.js • WebGL • Tailwind CSS</li><li>2026</li><li>Open Source no GitHub</li></ul>
 <a class='wp-link glow-pill sm micro' href='https://github.com/davihoriisantos/site00' target='_blank'>Repositório GitHub</a>
 </div>
 <figure class='wp-media'><div class='wp-mask'><img src='https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/0619d66f-7c8a-4492-8f46-931e3e82046a/original.png?width=1600&quality=82' alt='Portfólio em Three.js e WebGL' loading='eager' decoding='async'></div><i class='wp-glow'></i></figure>
-</article>
-
-<article class='wp' data-i='3'>
-<div class='wp-text'>
-<span class='wp-index micro'>Projeto 04 — FECAP Inovação</span>
-<h3 class='wp-name display'><span class='wl'><span class='wl-in'>Pesquisa Acadêmica,</span></span><span class='wl'><span class='wl-in'>projetos de IA.</span></span></h3>
-<p class='wp-desc'>Desenvolvimento de projetos interdisciplinares em equipe no Colégio FECAP. Resolução de desafios computacionais, algoritmos, banco de dados e aplicação ética da inteligência artificial.</p>
-<ul class='wp-meta micro'><li>Colégio FECAP • São Paulo</li><li>2025 - 2026</li><li>Ensino Médio + Técnico em IA</li></ul>
-<a class='wp-link glow-pill sm micro' href='#studio'>Conhecer Trajetória</a>
-</div>
-<figure class='wp-media'><div class='wp-mask'><img src='https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/175767be-adaa-426e-ada5-31d51e50cc75/original.png?width=1600&quality=82' alt='Pesquisa e inovação tecnológica' loading='eager' decoding='async'></div><i class='wp-glow'></i></figure>
 </article>
 </div>
 </div>
@@ -349,13 +462,18 @@ Davi Jun, 15 anos. Estudante do Colégio FECAP em São Paulo. Unindo a filosofia
 <script type="module">
 import*as e from'three';import{RoundedBoxGeometry as t}from'three/addons/geometries/RoundedBoxGeometry.js';import{EffectComposer as o}from'three/addons/postprocessing/EffectComposer.js';import{RenderPass as n}from'three/addons/postprocessing/RenderPass.js';import{UnrealBloomPass as a}from'three/addons/postprocessing/UnrealBloomPass.js';import{OutputPass as r}from'three/addons/postprocessing/OutputPass.js';import{Reflector as i}from'three/addons/objects/Reflector.js';const s={ticket:'<path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M14 6v12" stroke-dasharray="2 2.5"/>',note:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',chat:'<path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V16H7.5A2.5 2.5 0 0 1 5 13.5Z"/>',
 photo:'<rect x="4" y="5" width="16" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 17.5 10 12l3.5 3.5L16 13l4 4"/>',grid:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>',reply:'<path d="M10 8 5.5 12 10 16"/><path d="M6 12h8a5 5 0 0 1 5 5v1"/>',cube:'<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>',door:'<path d="M6 20V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14"/><path d="M4 20h16"/><circle cx="14.5" cy="12.5" r="1"/>',poster:'<rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/>',phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6.5h3"/><path d="M11 18h2"/>',lock:'<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><circle cx="12" cy="15.5" r="1.3"/>',
-avatar:'<circle cx="12" cy="12" r="8.5"/><path d="M9 10.2h.01M15 10.2h.01"/><path d="M8.8 14.2s1.1 1.8 3.2 1.8 3.2-1.8 3.2-1.8"/>',globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/>',bolt:'<path d="M13 3 5.5 13.5H12L11 21l7.5-10.5H12L13 3Z"/>',pin:'<path d="M7 4h10v17l-5-4-5 4V4Z"/>',link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/>',chart:'<path d="M4 20h16"/><rect x="6" y="11" width="3.5" height="9" rx="1"/><rect x="11" y="6" width="3.5" height="14" rx="1"/><rect x="16" y="14" width="3.5" height="6" rx="1"/>',palette:'<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.2 0 1.6-.9 1.2-1.7-.5-1 .1-2.3 1.4-2.3h1.7a4.2 4.2 0 0 0 4.2-4.2C20.5 7.5 16.7 3.5 12 3.5Z"/><circle cx="8" cy="12" r="1"/><circle cx="10" cy="8" r="1"/><circle cx="14.5" cy="7.5" r="1"/>'},l=[{id:'visao-computacional',name:'Visão Computacional',num:'01',caption:'Redes neurais que aprendem a ver o mundo',object:'mic',
-title:['Processamento de Imagens','e Redes Neurais'],body:'Exploração prática de redes neurais convolucionais (CNNs) e pipelines de visão computacional em Python, criados para detectar e classificar padrões em dados visuais reais.',features:[['cube','Modelos e Algoritmos em Python'],['photo','Detecção e Classificação Visual'],['bolt','Treinamento e Pesos Neurais']],cta:'Ver Projeto no Doc',work:0},
-{id:'machine-learning',name:'Machine Learning',num:'02',caption:'Modelagem preditiva e inteligência de dados',object:'bolt',title:['Do Dado Bruto','à Decisão Inteligente'],body:'Construção de pipelines de dados, treinamento de modelos supervisionados e não supervisionados (Scikit-Learn, Pandas) com foco em métricas analíticas e interpretabilidade.',features:[['chart','Análise Estatística e Métricas'],['bolt','Pipelines Automatizados de Dados'],['grid','Classificação e Regressão Avançada']],cta:'Ver Projeto no Doc',work:1},
-{id:'site00-webgl',name:'site00 & WebGL',num:'03',caption:'Portfólio em Three.js, Shaders e WebGL',object:'record',title:['Luz física','e espaço 3D interativo'],body:'Desenvolvido com Three.js, shaders GLSL de metal líquido, Tailwind CSS e GSAP para criar uma experiência digital cinematográfica com 60 FPS estáveis no navegador.',features:[['globe','WebGL, Shaders GLSL e Three.js'],['link','Código Aberto no GitHub (site00)'],['cube','Design System Futurista e Acessível']],cta:'Ver no GitHub',work:2},
-{id:'fecap-tech',name:'Colégio FECAP',num:'04',caption:'Ensino Médio Integrado ao Técnico em IA',object:'room',title:['Tradição Secular','e Tecnologia de Ponta'],body:'Formação rigorosa no Colégio FECAP em São Paulo. Imersão diária em fundamentos de computação, lógica matemática, engenharia de software e pesquisa científica.',features:[['door','Ensino Médio Integrado à IA'],['cube','Laboratórios de Inovação & Pesquisa'],['poster','Projetos Interdisciplinares em Equipe']],cta:'Ver Detalhes',work:3},
-{id:'olimpiadas',name:'Olimpíadas Científicas',num:'05',caption:'2ª Fase na OBMEP e na Olimpíada de Português',object:'padlock',title:['Rigor Matemático','e Clareza Linguística'],body:'Classificação para a 2ª Fase da OBMEP (Matemática) e da OP (Língua Portuguesa) em âmbito nacional. O equilíbrio ideal entre resolução analítica e expressão humana.',features:[['ticket','Classificado 2ª Fase OBMEP (Nacional)'],['note','Classificado 2ª Fase OP (Linguagens)'],['link','Raciocínio Analítico e Dedutivo']],cta:'Ver Conquistas',work:null},
-{id:'kaizen-origem',name:'Kaizen (改善)',num:'06',caption:'Melhoria contínua, raízes e equilíbrio',object:'magnet',title:['Tradição, Disciplina','e Atenção aos Detalhes'],body:'A herança japonesa inspira minha ética de trabalho: dedicação diária, foco em simplicidade e respeito às pessoas. Na vida pessoal, o apreço por boa gastronomia (sushi e massas artesanais).',features:[['palette','Filosofia Kaizen (1% Melhor ao Dia)'],['avatar','Estética Minimalista & Harmonia'],['reply','Gastronomia: Washoku & Culinária']],cta:'Ver Trajetória',work:null}],c=l.length,d=e=>document.querySelector(e),p=(e,t,o)=>Math.min(o,Math.max(t,e)),u=(e,t,o)=>e+(t-e)*o,h={outCubic:e=>1-Math.pow(1-e,3),
+avatar:'<circle cx="12" cy="12" r="8.5"/><path d="M9 10.2h.01M15 10.2h.01"/><path d="M8.8 14.2s1.1 1.8 3.2 1.8 3.2-1.8 3.2-1.8"/>',globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/>',bolt:'<path d="M13 3 5.5 13.5H12L11 21l7.5-10.5H12L13 3Z"/>',pin:'<path d="M7 4h10v17l-5-4-5 4V4Z"/>',link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/>',chart:'<path d="M4 20h16"/><rect x="6" y="11" width="3.5" height="9" rx="1"/><rect x="11" y="6" width="3.5" height="14" rx="1"/><rect x="16" y="14" width="3.5" height="6" rx="1"/>',palette:'<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.2 0 1.6-.9 1.2-1.7-.5-1 .1-2.3 1.4-2.3h1.7a4.2 4.2 0 0 0 4.2-4.2C20.5 7.5 16.7 3.5 12 3.5Z"/><circle cx="8" cy="12" r="1"/><circle cx="10" cy="8" r="1"/><circle cx="14.5" cy="7.5" r="1"/>'},l=[{id:'floodguard-ai',name:'FloodGuardAI',num:'01',caption:'FECART 2026 • 2 Patrocínios Conquistados',object:'bolt',
+title:['FloodGuardAI: FECART 2026','2 Patrocínios e Sucesso'],body:'Projeto de enorme sucesso na Feira de Criatividade e Arte da FECAP (FECART 2026). Sistema inteligente para prevenção e alerta antecipado de enchentes urbanas. Conquistou 2 patrocínios de apoiadores e está aberto a parcerias, investidores e novos contatos.',features:[['bolt','2 Patrocínios Conquistados na FECART'],['chart','Previsão de Enchentes em Tempo Real'],['link','Aberto a Parcerias e Contato']],cta:'Ver Projeto no Doc',work:0},
+{id:'visao-computacional',name:'Visão Computacional',num:'02',caption:'Redes neurais que aprendem a ver o mundo',object:'mic',
+title:['Processamento de Imagens','e Redes Neurais'],body:'Exploração prática de redes neurais convolucionais (CNNs) e pipelines de visão computacional em Python, criados para detectar e classificar padrões em dados visuais reais.',features:[['cube','Modelos e Algoritmos em Python'],['photo','Detecção e Classificação Visual'],['bolt','Treinamento e Pesos Neurais']],cta:'Ver Projeto no Doc',work:1},
+{id:'machine-learning',name:'Machine Learning',num:'03',caption:'Modelagem preditiva e inteligência de dados',object:'room',
+title:['Do Dado Bruto','à Decisão Inteligente'],body:'Construção de pipelines de dados, treinamento de modelos supervisionados e não supervisionados (Scikit-Learn, Pandas) com foco em métricas analíticas e interpretabilidade.',features:[['chart','Análise Estatística e Métricas'],['bolt','Pipelines Automatizados de Dados'],['grid','Classificação e Regressão Avançada']],cta:'Ver Projeto no Doc',work:2},
+{id:'site00-webgl',name:'site00 & WebGL',num:'04',caption:'Portfólio em Three.js, Shaders e WebGL',object:'record',
+title:['Luz física','e espaço 3D interativo'],body:'Desenvolvido com Three.js, shaders GLSL de metal líquido, Tailwind CSS e GSAP para criar uma experiência digital cinematográfica com 60 FPS estáveis no navegador.',features:[['globe','WebGL, Shaders GLSL e Three.js'],['link','Código Aberto no GitHub (site00)'],['cube','Design System Futurista e Acessível']],cta:'Ver no GitHub',work:3},
+{id:'olimpiadas',name:'Olimpíadas Científicas',num:'05',caption:'2ª Fase na OBMEP e na Olimpíada de Português',object:'padlock',
+title:['Rigor Matemático','e Clareza Linguística'],body:'Classificação para a 2ª Fase da OBMEP (Matemática) e da OP (Língua Portuguesa) em âmbito nacional. O equilíbrio ideal entre resolução analítica e expressão humana.',features:[['ticket','Classificado 2ª Fase OBMEP (Nacional)'],['note','Classificado 2ª Fase OP (Linguagens)'],['link','Raciocínio Analítico e Dedutivo']],cta:'Ver Conquistas',work:null},
+{id:'kaizen-origem',name:'Kaizen (改善)',num:'06',caption:'Melhoria contínua, raízes e equilíbrio',object:'magnet',
+title:['Tradição, Disciplina','e Atenção aos Detalhes'],body:'A herança japonesa inspira minha ética de trabalho: dedicação diária, foco em simplicidade e respeito às pessoas. Na vida pessoal, o apreço por boa gastronomia (sushi e massas artesanais).',features:[['palette','Filosofia Kaizen (1% Melhor ao Dia)'],['avatar','Estética Minimalista & Harmonia'],['reply','Gastronomia: Washoku & Culinária']],cta:'Ver Trajetória',work:null}],c=l.length,d=e=>document.querySelector(e),p=(e,t,o)=>Math.min(o,Math.max(t,e)),u=(e,t,o)=>e+(t-e)*o,h={outCubic:e=>1-Math.pow(1-e,3),
 inOutCubic:e=>e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2,inCubic:e=>e*e*e,outExpo:e=>1===e?1:1-Math.pow(2,-10*e),wheel:e=>1+1.9*Math.pow(e-1,3)+.9*Math.pow(e-1,2)},m=new URLSearchParams(location.search),y=m.get('capture'),w=matchMedia('(prefers-reduced-motion: reduce)').matches,f=!!y||w;f&&document.body.classList.add('no-anim');const g=new Set;function v(e,t,o,n,a=h.outCubic,r=0,i){f&&(n=0,r=0);const s=performance.now()+r,l={from:e[t],update(r){if(r<s)return;const c=n<=0?1:p((r-s)/n,0,1);e[t]=u(l.from,o,a(c)),c>=1&&(g.delete(l),i&&i())},kill(){g.delete(l)}};return g.add(l),l}const b=(e,t)=>f?t():setTimeout(t,e);function x(e,t){const o=document.createElement('canvas');return o.width=e,o.height=t,o}function M(t,o=!0){const n=new e.CanvasTexture(t);return o&&(n.colorSpace=e.SRGBColorSpace),n.anisotropy=8,n}function k(e,t){const o=x(e,e),n=o.getContext('2d'),a=n.createRadialGradient(e/2,e/2,0,e/2,e/2,e/2);return t.forEach((([e,t])=>a.addColorStop(e,t))),n.fillStyle=a,n.fillRect(0,0,e,e),M(o,!1)}
 function S(){const t=512,o=x(t,t),n=o.getContext('2d');for(let e=0;e<6;e++){const o=150+40*Math.random();n.fillStyle=`rgb(${o},${.72*o|0},${.5*o|0})`,n.fillRect(0,e*(t/6),t,t/6-2),n.fillStyle='#4a3320',n.fillRect(0,e*(t/6)+t/6-2,t,2)}for(let e=0;e<1800;e++){const e=Math.random()*t,o=Math.random()*t,a=20+120*Math.random(),r=40*Math.random();n.strokeStyle=`rgba(${60+r},${40+r},${25+r},0.22)`,n.lineWidth=1,n.beginPath(),n.moveTo(o,e),n.lineTo(o+a,e+2*(Math.random()-.5)),n.stroke()}const a=M(o);return a.wrapS=a.wrapT=e.RepeatWrapping,a.repeat.set(2,1.6),a}function P(){const e=x(256,340),t=e.getContext('2d');t.fillStyle='#b9a9ff',t.fillRect(0,0,e.width,e.height),t.strokeStyle='#17141f',t.lineWidth=12,t.beginPath(),t.arc(.4*e.width,.42*e.height,60,0,2*Math.PI),t.stroke(),t.beginPath(),t.arc(.6*e.width,.42*e.height,60,0,2*Math.PI),t.stroke(),t.fillStyle='#17141f';for(let e=0;e<3;e++)t.fillRect(40,230+22*e,100+30*e,6);return M(e)}function C(e){const t=x(512,512),o=t.getContext('2d')
 ;return o.fillStyle='#e8e4ff',o.beginPath(),o.arc(256,256,256,0,2*Math.PI),o.fill(),o.strokeStyle='#2a2140',o.lineWidth=8,o.beginPath(),o.arc(256,256,240,0,2*Math.PI),o.stroke(),o.save(),o.translate(256,256),o.rotate(-Math.PI/2),o.translate(-256,-256),o.fillStyle='#2a2140',o.font='300 92px Geist, Inter, sans-serif',o.textAlign='center',o.fillText(e.name.toUpperCase(),256,230),o.font='500 26px "Geist Mono", monospace',o.letterSpacing='6px',o.fillText('SIDE A · 45 RPM',256,322),o.restore(),o.fillStyle='#0b0b10',o.beginPath(),o.arc(256,256,24,0,2*Math.PI),o.fill(),M(t)}const T=function(){const t=512,o=x(t,t),n=o.getContext('2d');n.fillStyle='#7a7a7a',n.fillRect(0,0,t,t);for(let e=0;e<26e3;e++){const e=Math.random()*t,o=3+14*Math.random(),a=Math.random()*t,r=.5*(Math.random()-.5),i=50+150*Math.random();n.strokeStyle=`rgba(${i},${i},${i},${.35+.4*Math.random()})`,n.lineWidth=.5+.6*Math.random();for(const i of[-t,0,t])n.beginPath(),n.moveTo(a+i,e),n.lineTo(a+i+Math.cos(r)*o,e+Math.sin(r)*o),
@@ -396,7 +514,11 @@ Me.style.transform=`translate(${Ge.rx-Me.offsetWidth/2}px, ${Ge.ry-Me.offsetHeig
 he.material.opacity=.5*(1-l)*be.heroT,ye.position.x=y,ye.position.z=.15,ye.scale.set(a.obj.footprint[0]*f*1.3,a.obj.footprint[1]*f*2.6,1),ye.material.opacity=.34*(1-l)*be.heroT,se.position.x=y-.1,oe.position.x=y-.07,ne.position.x=y-.07,re.position.x=y-.07,pe.position.x=y-.1,ue.position.set(y,w,-.5),ue.material.opacity=.4*(1-l)*be.heroT,Y.position.x=y,K.uniforms.uBeamX.value=y)}))}(),ge.render()),requestAnimationFrame(ot)}document.addEventListener('visibilitychange',(()=>{tt=!document.hidden,tt&&(et=performance.now(),requestAnimationFrame(ot))}));const nt=d('#doc'),at=window.gsap,rt=window.ScrollTrigger;at.registerPlugin(rt);let it=!1,st=null;const lt=()=>innerWidth<1024;function ct(e){document.querySelectorAll('.nav-link').forEach((t=>t.classList.toggle('is-active',t.dataset.nav===e)))}function dt(e){document.documentElement.classList.toggle('doc',e),document.body.classList.toggle('doc',e),nt.setAttribute('aria-hidden',String(!e))}function pt(e){const t=nt.querySelector(e)
 ;return'#end'===e?document.documentElement.scrollHeight-innerHeight:Math.round(t.getBoundingClientRect().top+window.scrollY)}function ut(e,t=1200){const o=window.scrollY,n=performance.now();be.autoScroll=!0;const a=r=>{const i=f?1:p((r-n)/t,0,1);window.scrollTo(0,Math.round(u(o,e,h.inOutCubic(i)))),i<1?requestAnimationFrame(a):be.autoScroll=!1};requestAnimationFrame(a)}function ht(e='#work',t=null){const o=()=>null==t?pt(e):function(e){const t=nt.querySelector(`.wp[data-i="${e}"]`);if(!t)return pt('#work');if(!st||lt())return Math.max(0,Math.round(t.getBoundingClientRect().top+window.scrollY-96));const o=st.scrollTrigger,n=0===e?.3:e+.62;return Math.round(o.start+(o.end-o.start)*Math.min(1,n/st.duration()))}(t);if('doc'===be.mode)return void ut(o(),1400);if(be.busy)return;const n=be.mode;if(be.docFrom=n,be.detailOpen&&_e(),be.mode='doc',ct('end'===e.slice(1)?null:e.slice(1)),qe(e.slice(1)),Re(ke,!1),Re(Se,!1),Re(Pe,!1),Re(Ce,!1),We(!1),Ae.style.opacity=0,'carousel'===n){
 const e=Math.round(be.pos);be.pos=e,be.wrap=!1,be.exiting=!0,Ye(.8),v(be,'pos',e+1,950,h.wheel,0,(()=>{be.exiting=!1}))}else'hero'===n&&v(be,'heroT',0,700,h.inCubic);v(be,'viewShift',0,700,h.inOutCubic),dt(!0),At(),window.scrollTo(0,0),rt.refresh(),b('carousel'===n?380:120,(()=>ut(o(),'#work'===e&&null==t?1400:2e3))),Fe(900)}function mt(){'doc'!==be.mode||be.busy||(be.mode='carousel',be.detailOpen=!1,be.detailT=0,dt(!1),window.scrollTo(0,0),be.index=c-1,be.pos=c,be.wrap=!1,be.exiting=!1,be.heroT=1,$e(l[be.index]),Ie(be.index),qe('carousel'),ct('home'),Ae.style.opacity=1,Ye(.9),v(be,'pos',c-1,1e3,h.wheel,0,(()=>{be.wrap=!0,be.pos=c-1,We(!0)})),b(260,(()=>Re(Ce,!0))),Fe(1100))}function yt(){be.busy||'hero'===be.mode||('doc'===be.mode&&(dt(!1),window.scrollTo(0,0)),be.detailOpen&&(be.detailOpen=!1,be.detailT=0,Re(Te,!1),De()),Re(Pe,!1),Re(Ce,!1),We(!1),be.mode='hero',be.wrap=!0,be.exiting=!1,be.pos=1,be.index=1,be.heroT=.001,v(be,'viewShift',be.view.narrow?0:.086,900,h.inOutCubic),
-qe('hero'),ct('home'),b(200,(()=>{Ye(1),v(be,'heroT',1,900,h.outCubic),Re(ke,!0),Re(Se,!0),We(!0),Ae.style.opacity=1})),Fe(1200))}function wt(e){const t=l.findIndex((t=>t.id===e));t<0||be.busy||'doc'!==be.mode||(be.mode='carousel',be.detailOpen=!1,be.detailT=0,dt(!1),window.scrollTo(0,0),be.index=t,be.pos=t+.999,be.wrap=!1,be.exiting=!0,be.heroT=1,$e(l[t]),Ie(t),qe('carousel'),ct('home'),Ae.style.opacity=1,Ye(.9),v(be,'pos',t,1e3,h.wheel,0,(()=>{be.exiting=!1,be.wrap=!0,be.pos=t})),Fe(1100),b(1180,(()=>{'carousel'===be.mode&&be.index===t&&ze()})))}const ft=[{id:'exatas-linguagens',kind:'Conquistas • Reflexão',date:'Outubro 2026',mins:5,title:'Por que a Inteligência Artificial exige Matemática e Interpretação',
+qe('hero'),ct('home'),b(200,(()=>{Ye(1),v(be,'heroT',1,900,h.outCubic),Re(ke,!0),Re(Se,!0),We(!0),Ae.style.opacity=1})),Fe(1200))}function wt(e){const t=l.findIndex((t=>t.id===e));t<0||be.busy||'doc'!==be.mode||(be.mode='carousel',be.detailOpen=!1,be.detailT=0,dt(!1),window.scrollTo(0,0),be.index=t,be.pos=t+.999,be.wrap=!1,be.exiting=!0,be.heroT=1,$e(l[t]),Ie(t),qe('carousel'),ct('home'),Ae.style.opacity=1,Ye(.9),v(be,'pos',t,1e3,h.wheel,0,(()=>{be.exiting=!1,be.wrap=!0,be.pos=t})),Fe(1100),b(1180,(()=>{'carousel'===be.mode&&be.index===t&&ze()})))}const ft=[{id:'floodguard-fecart',kind:'Destaque • FECART 2026',date:'FECART 2026',mins:4,title:'FloodGuardAI na FECART 2026: 2 Patrocínios e Prevenção Inteligente',
+img:'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/175767be-adaa-426e-ada5-31d51e50cc75/original.png?width=1600&quality=82',alt:'FloodGuardAI — IA para Prevenção de Enchentes na FECART 2026',
+lede:'Como o FloodGuardAI se destacou na FECART 2026 com IA para alerta precoce de alagamentos, conquistou 2 patrocínios e abriu portas para novos parceiros.',
+body:['Apresentar o FloodGuardAI na FECART 2026 (Feira de Criatividade e Arte da FECAP) foi um dos momentos mais marcantes da minha trajetória. Criamos um sistema inteligente para antecipar riscos de enchentes urbanas através de dados pluviométricos e visão computacional em tempo real.','O projeto foi um enorme sucesso na feira: chamou a atenção de avaliadores e especialistas, garantindo 2 patrocínios de empresas parceiras que acreditaram no potencial da solução.','Nosso objetivo é continuar evoluindo o sistema para aplicações em larga escala. Se você, sua empresa ou investidores tiverem interesse em colaborar, apoiar ou implementar o FloodGuardAI, estamos à disposição para conversar!']},
+{id:'exatas-linguagens',kind:'Conquistas • Reflexão',date:'Outubro 2026',mins:5,title:'Por que a Inteligência Artificial exige Matemática e Interpretação',
 img:'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/bc8b7f42-d673-4413-a6ba-30f191ced84f/original.png?width=1000&quality=80',alt:'Feixes de luz e representação de dados',
 lede:'A classificação para a 2ª Fase na OBMEP e na Olimpíada de Português revelou que código é a ponte entre raciocínio abstrato e comunicação humana.',
 body:['Muitas pessoas acreditam que Inteligência Artificial é puramente código de computação. No entanto, minha experiência no Colégio FECAP e nas olimpíadas científicas mostrou o contrário: redes neurais são construídas sobre matrizes, cálculo e probabilidade, enquanto grandes modelos de linguagem operam sobre semântica, contexto e gramática.','Alcançar a Segunda Fase da OBMEP me deu disciplina com a abstração matemática e resolução lógica sob pressão. Ao mesmo tempo, a classificação na Olimpíada de Português reforçou minha capacidade de entender nuances e formular hipóteses claras.','Para um estudante de 15 anos ingressando em IA, dominar essas duas linguagens — a dos números e a das palavras — é o que diferencia quem apenas usa modelos de quem realmente entende como eles funcionam.']},
@@ -407,16 +529,12 @@ body:['Na cultura japonesa, o termo Kaizen (改善) significa mudar para melhor 
 {id:'bastidores-site00',kind:'Engenharia & WebGL',date:'Agosto 2026',mins:6,title:'Construindo um site com Three.js e WebGL aos 15 anos',
 img:'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/ca395dd1-2038-4dd0-89cd-6e3f56643237/original.png?width=1200&quality=80',alt:'Linhas de código e luz WebGL no navegador',
 lede:'Da ideia conceitual inspirada em palcos digitais futuristas até a renderização de shaders de metal líquido e iluminação física no navegador.',
-body:['Queria criar um portfólio que não se parecesse com um currículo comum em PDF. A inspiração veio de sites que tratam interfaces como palcos tridimensionais, onde luz, reflexo e movimento contam uma história.','Utilizar Three.js e shaders GLSL exigiu entender matrizes de projeção, buffers de vértices e iluminação volumétrica. Cada elemento na tela foi calibrado para manter 60 FPS estáveis mesmo em dispositivos com menor poder gráfico.','O resultado é o repositório site00: um espaço onde minha paixão por tecnologia se expressa em forma de arte digital interativa.']},
-{id:'gastronomia-equilibrio',kind:'Cultura & Hobbies',date:'Julho 2026',mins:4,title:'O que me inspira fora das telas: culinária japonesa e massas artesanais',
-img:'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/render/image/public/assets/assets/2e815afb-cac1-4c01-90e1-cf3810246e35/generations/16a5e565-1928-4ed0-b4c6-63c250ea4344/original.png?width=1200&quality=80',alt:'Mesa gastronômica e momentos de pausa',
-lede:'Cozinhar e apreciar boa comida é minha forma favorita de desconectar, exercitar os sentidos e recarregar a criatividade.',
-body:['Equilíbrio é fundamental para quem passa horas debruçado sobre código e fórmulas. Minha maior paixão fora da tecnologia é a gastronomia.','De um lado, a culinária japonesa tradicional (Washoku) — a delicadeza de cortes precisos de sashimi e a profundidade de um caldo de ramen cozido por horas. Do outro lado, o prazer reconfortante de massas frescas bem elaboradas.','Ambas compartilham o mesmo princípio da boa engenharia: ingredientes autênticos, respeito ao tempo e dedicação ao processo.']}],gt=d('#reader'),vt=gt.querySelector('.reader-body'),bt=gt.querySelector('.reader-panel'),xt=gt.querySelector('.reader-scroll');let Mt=null;const kt=()=>gt.classList.contains('is-open'),St=e=>e.replace(/&/g,'&amp;').replace(/</g,'&lt;');function Pt(){kt()&&(gt.classList.remove('is-open'),gt.setAttribute('aria-hidden','true'),Mt&&Mt.focus&&Mt.focus({
+body:['Queria criar um portfólio que não se parecesse com um currículo comum em PDF. A inspiração veio de sites que tratam interfaces como palcos tridimensionais, onde luz, reflexo e movimento contam uma história.','Utilizar Three.js e shaders GLSL exigiu entender matrizes de projeção, buffers de vértices e iluminação volumétrica. Cada elemento na tela foi calibrado para manter 60 FPS estáveis mesmo em dispositivos com menor poder gráfico.','O resultado é o repositório site00: um espaço onde minha paixão por tecnologia se expressa em forma de arte digital interativa.']}],gt=d('#reader'),vt=gt.querySelector('.reader-body'),bt=gt.querySelector('.reader-panel'),xt=gt.querySelector('.reader-scroll');let Mt=null;const kt=()=>gt.classList.contains('is-open'),St=e=>e.replace(/&/g,'&amp;').replace(/</g,'&lt;');function Pt(){kt()&&(gt.classList.remove('is-open'),gt.setAttribute('aria-hidden','true'),Mt&&Mt.focus&&Mt.focus({
 preventScroll:!0}),Mt=null)}function Ct(e){const t=[];return[...e.childNodes].forEach((o=>{if(3!==o.nodeType)return;const n=document.createDocumentFragment();for(const e of o.textContent){const o=document.createElement('span');o.className='ch',o.textContent=' '===e?String.fromCharCode(160):e,n.appendChild(o),t.push(o)}e.replaceChild(n,o)})),t}function Tt(e){const t=e.textContent.trim().split(/\s+/);return e.textContent='',t.map(((o,n)=>{const a=document.createElement('span');return a.className='sw',a.textContent=o,e.appendChild(a),n<t.length-1&&e.appendChild(document.createTextNode(' ')),a}))}document.addEventListener('click',(e=>{const t=e.target.closest('[data-entry]');if(t)return e.preventDefault(),o=t.dataset.entry,n=t,kt()||(Mt=n||document.activeElement),function(e){
 if('index'===e)return void(vt.innerHTML=`<span class="reader-meta micro">Journal · ${String(ft.length).padStart(2,'0')} entries</span><h2 class="reader-title display">Todas as publicações</h2><div class="reader-list">`+ft.map((e=>`<button type="button" class="reader-item" data-entry="${e.id}"><span class="t display">${St(e.title)}</span><span class="m micro">${e.kind} · ${e.date} · ${e.mins} min</span><span class="go micro">Read →</span></button>`)).join('')+'</div>');const t=Math.max(0,ft.findIndex((t=>t.id===e))),o=ft[t],n=ft[(t+1)%ft.length]
 ;vt.innerHTML=`<span class="reader-meta micro">${o.kind} · ${o.date} · ${o.mins} min de leitura</span><h2 class="reader-title display">${St(o.title)}</h2><figure class="reader-fig"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="${St(o.alt)}" decoding="async"></figure><p class="reader-lede">${St(o.lede)}</p>`+o.body.map((e=>`<p class="reader-p">${St(e)}</p>`)).join('')+`<div class="reader-foot"><span class="micro">Próximo artigo</span><button type="button" class="reader-next display" data-entry="${n.id}">${St(n.title)} →</button><button type="button" class="micro" data-entry="index" style="color:#c7c2ff;cursor:pointer">Ver todas</button></div>`}(o),gt.classList.add('is-open'),gt.setAttribute('aria-hidden','false'),Me.classList.remove('is-view'),function(){xt.scrollTop=0;const e=[...vt.children],t=vt.querySelector('.reader-fig');at.killTweensOf(e),at.set(e,{opacity:0,y:22}),t&&(at.killTweensOf(t),at.set(t,{clipPath:'inset(0% 0% 100% round 16px)',opacity:1,y:0}),at.to(t,{clipPath:'inset(0% 0% 0% round 16px)',
 duration:w?0:1.1,ease:'power3.inOut',delay:w?0:.25})),at.to(e.filter((e=>e!==t)),{opacity:1,y:0,duration:w?0:.8,ease:'power3.out',stagger:w?0:.07,delay:w?0:.3})}(),void bt.focus({preventScroll:!0});var o,n;if(e.target.closest('[data-reader-close]'))return e.preventDefault(),void Pt();const a=e.target.closest('[data-release]');if(a)return e.preventDefault(),void wt(a.dataset.release);const r=e.target.closest('[data-soon]');if(r){if(e.preventDefault(),r.dataset.label)return;r.dataset.label=r.textContent,at.to(r,{opacity:0,duration:.18,onComplete:()=>{r.textContent='Coming soon',at.to(r,{opacity:1,duration:.25})}}),b(1700,(()=>at.to(r,{opacity:0,duration:.18,onComplete:()=>{r.textContent=r.dataset.label,delete r.dataset.label,at.to(r,{opacity:1,duration:.25})}})))}})),gt.querySelector('.reader-scrim').addEventListener('wheel',(e=>e.preventDefault()),{passive:!1});const Et=(e,t)=>e+Math.random()*(t-e);function At(){if(it)return;it=!0;const e=!!f||.6;f&&at.globalTimeline.timeScale(1e3),
-document.querySelectorAll('.work-title .wt-txt').forEach(Ct),at.set('.work-title .ch',{yPercent:115,rotate:4,transformOrigin:'0% 100%'}),at.set('.work-intro .lm',{yPercent:110}),at.set('.work-lede',{opacity:0,y:24}),rt.create({trigger:'.work-intro',start:'top 70%',once:!0,onEnter:()=>{at.to('.work-title .ch',{yPercent:0,rotate:0,duration:1.15,ease:'power4.out',stagger:.022}),at.to('.work-intro .lm',{yPercent:0,duration:.9,ease:'power3.out'}),at.to('.work-lede',{opacity:1,y:0,duration:1,delay:.55,ease:'power3.out'})}}),at.fromTo('.work-title',{letterSpacing:'0.01em'},{letterSpacing:'-0.045em',ease:'none',scrollTrigger:{trigger:'.work-intro',start:'top bottom',end:'bottom top',scrub:e}});const t=[...document.querySelectorAll('.wp')];if(t.forEach((e=>{const t=e.querySelector('img');t&&t.decode&&t.decode().catch((()=>{}))})),t.forEach((e=>e.querySelectorAll('.wp-name .wl-in').forEach(Ct))),lt())t.forEach((e=>{
+document.querySelectorAll('.work-title .wt-txt').forEach(Ct),at.set('.work-title .ch',{yPercent:115,rotate:4,transformOrigin:'0% 100%'}),at.set('.work-intro .lm',{yPercent:110}),at.set('.work-lede',{opacity:0,y:24}),rt.create({trigger:'.work-intro',start:'top 70%',once:!0,onEnter:()=>{at.to('.work-title .ch',{yPercent:0,rotate:0,duration:1.15,ease:'power4.out',stagger:.022}),at.to('.work-intro .lm',{yPercent:0,duration:.9,ease:'power3.out'}),at.to('.work-lede',{opacity:1,y:0,duration:1,delay:.55,ease:'power3.out'})}}),at.fromTo('.work-title',{letterSpacing:'-0.005em'},{letterSpacing:'-0.005em',ease:'none'});const t=[...document.querySelectorAll('.wp')];if(t.forEach((e=>{const t=e.querySelector('img');t&&t.decode&&t.decode().catch((()=>{}))})),t.forEach((e=>e.querySelectorAll('.wp-name .wl-in').forEach(Ct))),lt())t.forEach((e=>{
 const t=e.querySelectorAll('.wp-name .ch'),o=e.querySelectorAll('.wp-index, .wp-desc, .wp-meta, .wp-link');at.set(t,{yPercent:115}),at.set(o,{opacity:0,y:20}),rt.create({trigger:e,start:'top 80%',once:!0,onEnter:()=>{at.to(t,{yPercent:0,duration:1,ease:'power3.out',stagger:.015}),at.to(o,{opacity:1,y:0,duration:.8,stagger:.06})}})}));else{const o=st=at.timeline({scrollTrigger:{trigger:'.work-gallery',start:'top top',end:'bottom bottom',scrub:e,pin:'.work-pin',pinSpacing:!1,anticipatePin:1}});t.forEach(((e,n)=>{const a=e.querySelector('.wp-mask'),r=e.querySelector('img'),i=e.querySelectorAll('.wp-name .ch'),s=e.querySelectorAll('.wp-index, .wp-desc, .wp-meta, .wp-link'),l=n;if(e.style.zIndex=1+n,0===n?(at.set(a,{clipPath:'inset(0% 0% round 20px)',yPercent:0,scale:1,opacity:1}),at.set(r,{scale:1,yPercent:6}),at.set(i,{yPercent:0}),at.set(s,{opacity:1,y:0})):(at.set(a,{clipPath:'inset(50% 0% round 20px)',yPercent:0,scale:1,opacity:0}),at.set(r,{scale:1.2,yPercent:6}),at.set(i,{
 yPercent:115}),at.set(s,{opacity:0,y:26}),o.to(a,{clipPath:'inset(0% 0% round 20px)',duration:.36,ease:'power3.inOut'},l).to(a,{opacity:1,duration:.1,ease:'power1.in'},l+.05).to(r,{scale:1,duration:.5,ease:'power2.out'},l).to(i,{yPercent:0,duration:.3,ease:'power3.out',stagger:.012},l+.2).to(s,{opacity:1,y:0,duration:.26,ease:'power2.out',stagger:.04},l+.26)),o.to(r,{yPercent:-6,duration:.62,ease:'none'},l+.36),n<t.length-1){const e=n+.96;o.to(i,{yPercent:-115,duration:.18,ease:'power3.in',stagger:{amount:.1}},e-.04).to(s,{opacity:0,y:-18,duration:.16,ease:'power2.in'},e-.04).to(a,{scale:.93,yPercent:-3,opacity:0,duration:.4,ease:'power2.inOut'},e+.04)}o.call((()=>t.forEach(((e,t)=>e.classList.toggle('is-live',t===n)))),null,Math.max(0,n-.05))}));const n=document.querySelector('.bigidx-strip');t.forEach(((e,t)=>{t>0&&o.to(n,{yPercent:-100*t,duration:.3,ease:'power3.inOut'},t-.2)})),o.to({},{duration:.55}),at.fromTo('.rail-fill',{scaleY:.25},{scaleY:1,ease:'none',scrollTrigger:{
 trigger:'.work-gallery',start:'top top',end:'bottom bottom',scrub:e}}),t[0].classList.add('is-live')}const o=Me.querySelector('.lbl');document.querySelectorAll('.wp-media').forEach((e=>{const t=e.querySelector('.wp-mask'),n=e.querySelector('img');e.addEventListener('pointermove',(a=>{const r=e.getBoundingClientRect(),i=(a.clientX-r.left)/r.width-.5,s=(a.clientY-r.top)/r.height-.5;at.to(t,{rotateY:7*i,rotateX:7*-s,duration:.7,ease:'power2.out',overwrite:'auto'}),at.to(n,{x:16*i,y:12*s,duration:.7,overwrite:'auto'}),Me.classList.add('is-view'),o.textContent='VIEW'})),e.addEventListener('pointerleave',(()=>{at.to(t,{rotateY:0,rotateX:0,duration:.9,ease:'power3.out'}),at.to(n,{x:0,y:0,duration:.9}),Me.classList.remove('is-view')})),e.addEventListener('click',(()=>{const t=e.closest('.wp').querySelector('.wp-link');t&&wt(t.dataset.release)}))}));const n=[...document.querySelectorAll('.studio-chapter')];if(lt())n.forEach((e=>{Tt(e.querySelector('.sc-title'))
